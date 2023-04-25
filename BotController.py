@@ -4,6 +4,7 @@ sys.path.append("../")
 
 import pandas as pd
 import numpy as np
+
 import ccxt
 from pymongo import MongoClient
 
@@ -63,7 +64,7 @@ db = db_client['BINANCE_FUTURES']
 cursor = db['SYMBOL_INFO']
 symbol_info = pd.DataFrame(list(cursor.find()))
 # print(symbol_info)
-symbol = symbol_info['symbol']
+symbol = symbol_info['pair']
 
 symbol = ['ADA/USDT:USDT']
 

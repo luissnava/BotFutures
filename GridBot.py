@@ -17,10 +17,12 @@ class GridBot_Classic:
         self.db_client = MongoClient('localhost')
         self.db = self.db_client['BINANCE_FUTURES']
         self.market_data = self.db['SYMBOL_INFO'].find_one({'symbol':symbol})
+        
         self.epsilon_min = self.market_data['minNotional']
         self.delta_min = self.market_data['minStep']
         self.size = self.r_epsilon * self.epsilon_min
         self.distance = self.k_delta * self.delta_min
+        print(self.epsilon_min,self.delta_min,self.size,self.distance)
 
     def is_available(self, symbol, price):
         db = self.db

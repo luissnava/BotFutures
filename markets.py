@@ -19,7 +19,7 @@ def update_markets(exchange, leverage = 5, marginType = 'ISOLATED'):
     temp = []
 
     if len(in_db) != 0:
-        temp = list(in_db['symbol'])
+        temp = list(in_db['pair'])
 
 
     for market in markets:
@@ -31,14 +31,16 @@ def update_markets(exchange, leverage = 5, marginType = 'ISOLATED'):
                 min_notional = float(min_notional)
             
             symbol_info = {
-            'symbol' : symbol,
-            'pricePrecision': int(market['info']['pricePrecision']),
-            'quantityPrecision': int(market['info']['quantityPrecision']),
-            'minNotional': min_notional,
-            'minStep': float(1/10**int(market['info']['pricePrecision'])),
-            'bid':0,
-            'ask':0,
-            'midprice':0,
+            'pair': market['symbol'],
+            'baseAsset': market['info']['baseAsset'],
+            'quoteAsset': market['info']['quoteAsset'],
+            'minQty': market['limits']['amount']['min'],
+            'maxQty': market['limits']['amount']['max'],
+            'minPrice': market['limits']['price']['min'],
+            'maxPrice': market['limits']['price']['max'],
+            'tickSize': float(next(filter(lambda x: x['filterType'] == 'PRICE_FILTER', market['info']['filters']))['tickSize']),
+            'stepSize': float(next(filter(lambda x: x['filterType'] == 'LOT_SIZE', market['info']['filters']))['stepSize'])
+
             }
 
             if len(in_db) == 0 and market['linear']:

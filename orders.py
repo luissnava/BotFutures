@@ -33,15 +33,24 @@ def update_orders(exchange, new_orders = [], cancel_orders = []):
     time.sleep(1)
 
 def create_order(exchange, params_order):
-    price, amount = format_price_and_amount(symbol = params_order['symbol'], price = params_order['price'], amount = params_order['quantity']/params_order['price'])
-    order = exchange.create_order(
-        symbol = params_order['symbol'],
-        type = params_order['type'], # 'market', 'limit'
-        side = params_order['side'], # 'buy', 'sell'
-        price = price,
-        amount = amount,
-        params = params_order['params']
-    )
+    print("parametros",params_order)
+    # price, amount = format_price_and_amount(symbol = params_order['symbol'], price = params_order['price'], amount = params_order['quantity']/params_order['price'])
+   
+    # order = exchange.create_order(
+    #     symbol = params_order['symbol'],
+    #     type = params_order['type'], # 'market', 'limit'
+    #     side = params_order['side'], # 'buy', 'sell'
+    #     price = params_order['price'],
+    #     amount = params_order['quantity']/params_order['price'],
+    #     params = params_order['params']
+
+    #     # 'symbol': 'XRP/USDT',
+    #     # 'type': 'LIMIT',
+    #     # 'side': 'BUY',
+    #     # 'quantity': 100,
+    #     # 'price': 0.02,
+    #     # 'timeInForce': 'GTC'
+    # )
 
 
 def cancel_order(exchange, params_order = {}):
